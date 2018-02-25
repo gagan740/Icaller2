@@ -1,0 +1,27 @@
+{
+  "name": "icaller",
+  "version": "1.0.0",
+  "description": "demo project",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon start.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gagan740/Icaller2.git"
+  },
+  "author": "Gagan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gagan740/Icaller2/issues"
+  },
+  "homepage": "https://github.com/gagan740/Icaller2#readme",
+  "dependencies": {
+    "dotenv": "^5.0.0",
+    "express": "^4.16.2",
+    "mongoose": "^5.0.7"
+  },
+  "devDependencies": {
+    "nodemon": "^1.15.1"
+  }
+}

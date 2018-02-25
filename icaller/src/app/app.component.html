@@ -1,0 +1,22 @@
+<div class="container">
+  <ul>
+    <li *ngFor="let item of collection | paginate: { itemsPerPage: 10, currentPage: p }">
+      <strong>ListID</strong>: {{ item.listID }}
+    </li>
+  </ul>
+
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+
+<hr/>
+<br/>
+
+<div class="container" style="background:bisque">
+    <li *ngFor="let item of interfaceData | async">
+      <strong>ListID</strong>: {{ item.listID }}
+    </li>
+</div>
+
+<div class="container">
+  <app-promise></app-promise>
+</div>
