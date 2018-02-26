@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient  } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
 interface IList {
-  listID: number;
+  listID: number[];
+  total: number;
 }
 
 @Injectable()
@@ -37,10 +39,14 @@ export class ListingService {
     return promise;
   }
 
-  getListDataInterface(): Observable<IList[]> {
-    return this.http.post(this.url + 'get-list', { skip: 0, limit: 10, sort: {'_id': 1}}).map(res => {
+  getListDataInterface(page): Observable<IList> {
+    const perPage = 10;
+    const limit = perPage - 1;
+    const start = (page - 1) * perPage;
+    // const end = start + perPage;
+    return this.http.post<IList>(this.url + 'get-list', { skip: start, limit: limit, sort: {'_id': 1}}).map(res => {
       const results = res['list'];
-      return results;
+      return {listID: results, total: 50};
     });
   }
 

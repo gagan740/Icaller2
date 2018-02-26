@@ -5,16 +5,17 @@
     </li>
   </ul>
 
-  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
 </div>
 
 <hr/>
 <br/>
 
 <div class="container" style="background:bisque">
-    <li *ngFor="let item of interfaceData | async">
+    <li *ngFor="let item of interfaceData | async | paginate: { id: 'server', itemsPerPage: 10, currentPage: p, totalItems: total }">
       <strong>ListID</strong>: {{ item.listID }}
     </li>
+    <pagination-controls (pageChange)="interfaceListData($event)" id="server"></pagination-controls>
 </div>
 
 <div class="container">

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ListingService } from './services/listing.service';
 import { Observable } from 'rxjs/Observable';
-
-interface IList {
-  listID: number;
-}
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/delay';
 
 @Component({
   selector: 'app-root',
@@ -13,9 +12,10 @@ interface IList {
 })
 export class AppComponent implements OnInit {
   public collection;
-  public interfaceData: Observable<IList[]>;
-  public page: number = 1;
+  public interfaceData;
+  public p: number = 1;
   public title = 'app';
+  public total: number;
   // public interfaceData  = new Observable<IList[]>;
 
 
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.listData();
-    this.interfaceListData();
+    this.interfaceListData(1);
   }
 
   listData() {
@@ -34,8 +34,25 @@ export class AppComponent implements OnInit {
     });
   }
 
-  interfaceListData() {
-    this.interfaceData = this._data.getListDataInterface();
+  interfaceListData(page: number) {
+    this.interfaceData = this._data.getListDataInterface(page)
+    .do(res => {
+      console.log(res);
+      this.total = res.total;
+      this.p = page;
+    })
+    .map(res => res.listID);
   }
+
+  // interfaceListData(page: number) {
+  //   this._data.getListDataInterface(page)
+  //   .subscribe(res => {
+  //     console.log(res);
+  //   });
+  // }
+
+  // getPage(page: number) {
+  //   this.interfaceData = this._data.getListDataInterface(page);
+  // }
 
 }
