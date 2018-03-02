@@ -17,6 +17,7 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 });
+
 app.use('/api',appRoutes);
 
 app.use(express.static(__dirname + '/icaller/dist/'));
